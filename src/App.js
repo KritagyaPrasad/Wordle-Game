@@ -21,7 +21,7 @@ function App() {
     guessedWord:false,
   })
 
-  const correctWord="SOBER";
+  const correctWord="SPOON";
 
   useEffect(()=>{
     generateWordSet().then((words)=>{
@@ -50,12 +50,13 @@ function App() {
   const onEnter=()=>{
     if(currentAttempt.letterPos!==5) return;
     let currWord="";
-    for(let i=0;i<5;i++){
+    for(let i=0;i<4;i++){
       currWord+=board[currentAttempt.attempt][i];
     }
     console.log(currWord);
     if(wordSet.has((currWord+"\r").toLowerCase())){
       setCurrentAttempt({attempt:currentAttempt.attempt+1,letterPos:0});
+      console.log(currentAttempt.attempt);
     }
     else{
       alert("Word not found");

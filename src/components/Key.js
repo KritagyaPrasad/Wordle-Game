@@ -11,7 +11,7 @@ function Key({keyValue,bigKey,disabled}) {
 
   const {onSelectLetter,onDelete,onEnter}=useContext(AppContext);
 
-  const selectLetter=()=>{
+  const selectLetter = ()=>{
 
     //enter key functionality
     if(keyValue==="ENTER"){

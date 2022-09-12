@@ -3,37 +3,37 @@ import Key from './Key';
 import {AppContext} from "../App";
 function Keyboard() {
   
-  const{onSelectLetter,OnEnter,OnDelete,disabledLetters}=useContext(AppContext);
+  const{onSelectLetter,OnEnter,OnDelete,disabledLetters,currentAttempt}=useContext(AppContext);
 
   const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
   const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
   const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
 
   const handleKeyboard = useCallback((event)=>{
-    if(event.key==='Enter'){
+    if(event.keyCode===13){
       OnEnter();
     }
-    else if(event.key==='Backspace'){
+    else if(event.keyCode===8){
       OnDelete();
     }
     else{
       keys1.forEach((key)=>{
-        if(event.key===key.toLowerCase()){
+        if(event.key.toLowerCase()===key.toLowerCase()){
           onSelectLetter(key);
         }
       });
       keys2.forEach((key)=>{
-        if(event.key===key.toLowerCase()){
+        if(event.key.toLowerCase()===key.toLowerCase()){
           onSelectLetter(key);
         }
       });
       keys3.forEach((key)=>{
-        if(event.key===key.toLowerCase()){
+        if(event.key.toLowerCase()===key.toLowerCase()){
           onSelectLetter(key);
         }
       })
     }
-  });
+  },[currentAttempt]);
 
   useEffect(()=>{
     document.addEventListener("keydown",handleKeyboard);
@@ -57,9 +57,9 @@ function Keyboard() {
       </div>
 
       <div className="line3">
-        <Key keyValue={"ENTER"} bigKey={true}/>
+        <Key keyValue={"ENTER"} bigKey={true} />
         {keys3.map((key) => {
-          return <Key keyValue={key}/>
+          return <Key keyValue={key} disabled={disabledLetters.includes(key)}/>
         })}
         <Key keyValue={"DELETE"} bigKey={true}/>
       </div>
