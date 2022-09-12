@@ -10,10 +10,10 @@ function Keyboard() {
   const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
 
   const handleKeyboard = useCallback((event)=>{
-    if(event.keyCode===13){
+    if(event.key==='Enter'){
       OnEnter();
     }
-    else if(event.keyCode===8){
+    else if(event.key==='Backspace'){
       OnDelete();
     }
     else{

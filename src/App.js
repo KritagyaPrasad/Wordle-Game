@@ -50,7 +50,7 @@ function App() {
   const onEnter=()=>{
     if(currentAttempt.letterPos!==5) return;
     let currWord="";
-    for(let i=0;i<4;i++){
+    for(let i=0;i<5;i++){
       currWord+=board[currentAttempt.attempt][i];
     }
     console.log(currWord);
