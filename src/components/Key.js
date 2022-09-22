@@ -1,13 +1,19 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../App';
 
-function Key({keyValue,bigKey,disabled}) {
+function Key({keyValue,bigKey,disabled,correctkey,almostkey}) {
 
   //alternative of conditional attribute used below
-  // let idName;
-  // if(bigKey===true)
-  //   idName="big";
-  //pass the value idName to id attribute
+  let idName;
+  if(bigKey===true)
+    idName="big";
+  if(disabled)
+    idName="disabled";
+  if(correctkey)
+    idName="correctkey";
+  if(almostkey)
+    idName="almostkey";  
+  // pass the value idName to id attribute
 
   const {onSelectLetter,onDelete,onEnter}=useContext(AppContext);
 
@@ -32,7 +38,7 @@ function Key({keyValue,bigKey,disabled}) {
     
     //refer to https://blog.bitsrc.io/4-methods-to-add-conditional-attributes-to-react-components-b1ad195f449b
     //for adding conditional attributes to the react just like below id={bigKey && "big"}
-    <div className="key" id={bigKey ? "big" : disabled && "disabled"} onClick={selectLetter}>{keyValue}</div>
+    <div className="key" id={idName} onClick={selectLetter}>{keyValue}</div>
   )
 }
 

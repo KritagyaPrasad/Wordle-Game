@@ -120,3 +120,9 @@ nav h1{
 #disabled{
   background-color: #212022;
 }
+#correctkey{
+  background-color: #348d2e;
+}
+#almostkey{
+  background-color: #d3b20d;
+}
