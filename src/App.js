@@ -15,20 +15,28 @@ function App() {
   const [currentAttempt,setCurrentAttempt]=useState({attempt:0,letterPos:0});
   const [wordSet,setWordSet]=useState(new Set());
   const [disabledLetters,setDisabledLetters]=useState([]);
-
+  const [correctWord,setCorrectWord]=useState("");
   const [gameOver,setGameOver]=useState({
     gameOver:false,
     guessedWord:false,
   })
-
-  const correctWord="SPOON";
+ 
+  // const correctWord="SOBER";
 
   useEffect(()=>{
     generateWordSet().then((words)=>{
       setWordSet(words.wordSet);
+      setCorrectWord(words.correct);
     });
   },[])
+  
+  useEffect(()=>{
+    console.log(correctWord);
+  },[correctWord])
 
+  // useEffect(()=>{
+  //   console.log("hogya");
+  // },[gameOver.gameOver]);
 
   const onSelectLetter=(keyValue)=>{
     //edge case
@@ -52,6 +60,7 @@ function App() {
     let currWord="";
     for(let i=0;i<5;i++){
       currWord+=board[currentAttempt.attempt][i];
+
     }
     console.log(currWord);
     if(wordSet.has((currWord+"\r").toLowerCase())){
@@ -62,8 +71,13 @@ function App() {
       alert("Word not found");
     }
 
-    if(currWord===correctWord){
+    if((currWord+"\r").toLowerCase()===correctWord){
+      console.log("run horha hai");
       setGameOver({gameOver:true,guessedWord:true})
+      return;
+    }
+    if(currentAttempt.attempt===5){
+      setGameOver({gameOver:true,guessedWord:false});
       return;
     }
   } 
